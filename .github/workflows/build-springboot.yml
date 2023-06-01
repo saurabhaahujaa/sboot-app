@@ -1,0 +1,50 @@
+name: Build & Test Spring boot app
+
+on:
+  push:
+    branches: [ "main", "rel-*" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-20.04
+
+    timeout-minutes: 10
+
+    steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Inspect environment
+        run: |
+          echo "----------------------------------------------------------"
+          echo Event: ${{ github.event_name }}
+          echo Branch: ${{ github.ref }}
+          echo Repo: ${{ github.repository }}
+          echo "----------------------------------------------------------"
+          echo Home dir: $HOME
+          echo Current dir: $(pwd)
+          echo "----------------------------------------------------------"
+          uname -a
+          lsb_release -a
+          echo "----------------------------------------------------------"
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+          cache: 'maven'
+
+      - name: Build with Maven
+        run: |
+          version=$(mvn help:evaluate -q -DforceStdout -Dexpression=project.version)
+          echo "Building app version $version ..."
+          mvn clean dependency:build-classpath package -Dmaven.test.skip=true -Dmdep.outputFile=clspath.txt
+
+      - name: Run tests
+        run: mvn test
+
+
