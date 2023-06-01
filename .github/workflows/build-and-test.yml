@@ -39,3 +39,4 @@ jobs:
 
       - name: Another step
         run: echo "This is another step in the same job"
+    needs: build
