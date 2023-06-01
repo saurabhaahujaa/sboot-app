@@ -130,7 +130,7 @@ jobs:
       - name: Export results
         uses: actions/upload-artifact@v3
         with:
-          name: logs
+          name: logs.${{ matrix.browser }}.${{ matrix.device }}
           path: |
             ${{ matrix.browser }}.${{ matrix.device }}.app.log
             ${{ matrix.browser }}.${{ matrix.device }}.err.log
