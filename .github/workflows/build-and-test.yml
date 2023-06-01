@@ -102,7 +102,6 @@ jobs:
       NAME: Planet
 
     steps:
-
       - name: Demo of how to access current matrix context
         run: |
           echo "Browser: " ${{ matrix.browser }}
@@ -122,7 +121,7 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "Execute this step conditionally, only on main branch"
 
-       - name: Send some output to logfile
+      - name: Send some output to logfile
         run: |
           echo "Hello ${{ matrix.browser }} ${{ matrix.device }}" > app.log
           echo "This is another line" >> app.log
