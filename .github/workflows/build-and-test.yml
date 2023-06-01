@@ -96,7 +96,7 @@ jobs:
 
     timeout-minutes: 5
 
-    needs: [build, gen-matrix]
+    needs: [build-on-gen-matrix, gen-matrix]
 
     env:
       NAME: Planet
