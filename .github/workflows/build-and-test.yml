@@ -5,7 +5,7 @@ on:
     branches: [ "main", "rel-*" ]
 
 env:
-  NAME: Saurabh Ahuja
+  NAME: Saurabh-Ahuja
 
 jobs:
 
